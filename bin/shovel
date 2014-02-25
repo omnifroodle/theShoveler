@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'theShoveler'
+require 'theShoveler/targets/solr'
+require 'theShoveler/targets/dummy'
+require 'logger'
+require 'thor'
+
+class ShovelCLI < Thor
+
+  option :options, type: :hash, default: {}
+  option :fields, type: :hash, required: true
+  option :documents, type: :numeric, required: true
+  desc 'load HANDLER', 'Send made up data to HANDLER'
+  def load(handler)
+    logger = Logger.new(STDOUT)
+    logger.formatter = proc do |severity, datetime, progname, msg|
+      "#{msg}\n"
+    end
+    case handler
+    when 'solr'
+      target = TheShoveler::Targets::Solr.new(options.options)
+      logger.info 'using Solr target'
+    else
+      target = TheShoveler::Targets::Dummy.new(options.options)
+      logger.info 'using Dummy target'
+    end
+    puts options
+    TheShoveler::logger = logger
+    TheShoveler::Document.fields_from_hash(options.fields)
+
+    TheShoveler::Job.new(target, options.documents).run
+  end
+end
+
+ShovelCLI.start(ARGV)
