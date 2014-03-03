@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["matt.overstreet@gmail.com"]
   spec.description   = %q{Tool for loading random data into some web/network service}
   spec.summary       = %q{Tool for loading random data into some web/network service}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/omnifroodle/theShoveler"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -19,9 +19,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "minitest", "~> 5.2.3"
+  spec.add_development_dependency "rake", '~> 0'
+  spec.add_development_dependency "minitest", "~> 5.2"
 
-  spec.add_dependency 'rsolr'
-  spec.add_dependency 'thor'
+  spec.add_dependency 'rsolr', '~> 0'
+  spec.add_dependency 'thor', '~> 0'
 end
