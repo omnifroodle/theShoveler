@@ -1,4 +1,4 @@
-# TheShoveler
+<img src="public/images/theShoveler.png" style="margin: 2em 0">
 
 A gem to shovel data into a datastore (like Apache Solr!)
 
